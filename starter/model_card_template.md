@@ -15,8 +15,9 @@ reasonably clean records was extracted using the following conditions:
 ((AAGE>16) && (AGI>100) && (AFNLWGT>1)&& (HRSWK>0))
 
 ## Evaluation Data
-We evaluate the model on 20% of the data with splits. The Model itself is built on 80% of
-the whole data and 20 percent was used to evaluate the performance.
+We evaluate the model on 20% of the data with splits.
+The Model itself is built on 80% of the whole data and 20 percent
+was used to evaluate the performance.
 
 ## Metrics
 Precision, Recall, fbeta
@@ -26,4 +27,4 @@ We need to take care of some of the gender and nationality variables and check
 the performance on them.
 
 ## Caveats and Recommendations
-We can try other models and also do hyperparameter optimization
+We can try other models such as XGboost and also do hyperparameter optimization

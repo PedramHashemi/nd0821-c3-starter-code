@@ -4,6 +4,7 @@ import joblib
 from data import process_data
 from model import inference, compute_model_metrics
 import pprint
+import json
 
 cat_features = [
     "workclass",
@@ -54,3 +55,7 @@ def performance(slice_size: float=.2):
 if __name__ == "__main__":
     metrics = performance(slice_size=.2)
     pprint.pprint(metrics)
+    with open('starter/data/performance.json',
+              'w',
+              encoding='utf8') as outfile:
+        outfile.write(metrics)
