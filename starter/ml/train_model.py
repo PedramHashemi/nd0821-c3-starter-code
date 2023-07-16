@@ -1,7 +1,7 @@
 """Script to train machine learning model."""
 
 from sklearn.model_selection import train_test_split
-from model import inference, train_model
+from model import inference, train_model, compute_model_metrics
 # import dvc.api
 import pandas as pd
 from data import process_data
@@ -51,3 +51,7 @@ joblib.dump(lb, 'starter/model/lb.pkl')
 
 # Inference
 y_pred = inference(model, X_test)
+
+# Performance
+
+metrics = compute_model_metrics(y_test, y_pred)

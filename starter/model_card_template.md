@@ -20,7 +20,9 @@ The Model itself is built on 80% of the whole data and 20 percent
 was used to evaluate the performance.
 
 ## Metrics
-Precision, Recall, fbeta
+Precision: 1.0
+Recall: 0.007
+fbeta: 0.014
 
 ## Ethical Considerations
 We need to take care of some of the gender and nationality variables and check
