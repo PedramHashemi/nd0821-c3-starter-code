@@ -13,10 +13,6 @@ import joblib
 import uvicorn
 
 
-model = joblib.load("model/model.pkl")
-encoder = joblib.load("model/encoder.pkl")
-lb = joblib.load("model/lb.pkl")
-
 cat_features = [
     "workclass",
     "education",
@@ -96,7 +92,11 @@ def infer(profile: Profile):
     }
     data_df = pd.DataFrame(data)
 
-    processed_data, label, encoder, lb = process_data(
+    model = joblib.load("model/model.pkl")
+    encoder = joblib.load("model/encoder.pkl")
+    lb = joblib.load("model/lb.pkl")
+
+    processed_data, _, _, _ = process_data(
         data_df,
         categorical_features=cat_features,
         label="salary",
