@@ -3,7 +3,6 @@ pandas==2.0.3
 numpy==1.25.0
 fastapi==0.99.1
 requests
-fastapi==0.63.0
 uvicorn
 gunicorn
 dvc
