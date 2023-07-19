@@ -24,7 +24,9 @@ cat_features = [
     "native-country",
 ]
 
+
 class Profile(BaseModel):
+    """Profile for the persona."""
     age: int
     workclass: str
     fnlgt: int
@@ -40,7 +42,9 @@ class Profile(BaseModel):
     hours_per_week: int
     native_country: str
 
+
     class Config:
+        """config class."""
         schema_extra = {
             "example": {
                 "age": 38,
