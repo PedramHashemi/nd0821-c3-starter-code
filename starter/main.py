@@ -64,6 +64,7 @@ class Profile(BaseModel):
             }
         }
 
+
 app = FastAPI()
 
 @app.get("/")
