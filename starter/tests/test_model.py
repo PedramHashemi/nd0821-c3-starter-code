@@ -1,6 +1,6 @@
 """Test for model functions."""
 
-from starter.ml.model import inference, train_model, compute_model_metrics
+from ml.model import inference, train_model, compute_model_metrics
 from starter.ml.data import process_data
 import pytest
 import pandas as pd
