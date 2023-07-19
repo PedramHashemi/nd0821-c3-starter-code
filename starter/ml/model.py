@@ -24,7 +24,6 @@ def train_model(X_train, y_train):
     clf.fit(X_train, y_train)
     return clf
 
-
 def compute_model_metrics(y, preds):
     """
     Validates the trained machine learning model using precision, recall, and F1.
@@ -41,11 +40,11 @@ def compute_model_metrics(y, preds):
     recall : float
     fbeta : float
     """
+
     fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
     return precision, recall, fbeta
-
 
 def inference(model: RandomForestClassifier, X):
     """ Run model inferences and return the predictions.
@@ -61,4 +60,5 @@ def inference(model: RandomForestClassifier, X):
     preds : np.array
         Predictions from the model.
     """
+
     return model.predict(X)
