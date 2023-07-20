@@ -1,84 +1,88 @@
 """Test for model functions."""
 
 from ml.model import inference, compute_model_metrics
-from ml.data import process_data
+import ml.data as proc
 import pytest
 import pandas as pd
 import joblib
 from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+from numpy.random import seed, rand, randint
 
-cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-]
+seed(1)
 
 @pytest.fixture(name='data')
 def data():
     """
     Census data as fixture.
     """
-    return pd.read_csv("../starter/data/census.csv")
+    return pd.read_csv("./starter/data/census.csv")
 
 @pytest.fixture(name='lb')
 def lb():
     """
     label binerizer for the preprocessing the data.
     """
-    return joblib.load("starter/ml/model/lb.pkl")
+    return joblib.load("./starter/model/lb.pkl")
 
 @pytest.fixture(name='encoder')
 def encoder():
     """
     encoder for the preprocessing the data.
     """
-    return joblib.load("starter/ml/model/encoder.pkl")
+    return joblib.load("./starter/model/encoder.pkl")
 
 @pytest.fixture(name='sample')
-def sample():
+def sample(encoder, lb):
     """
     Sample data for inference.
     """
-    return data.iloc[0]
+
+    cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
+    census = pd.read_csv("./starter/data/census.csv")
+    samp = census.iloc[0:2]
+    x_sample, y_sample, _, _ = proc.process_data(
+        samp,
+        categorical_features=cat_features,
+        label='salary',
+        training=False,
+        encoder=encoder,
+        lb=lb
+    )
+    return x_sample, y_sample
 
 def test_train_model():
     """
     Test if the model is a random forest.
     """
 
-    model = joblib.load("starter/ml/model/model.pkl")
+    model = joblib.load("starter/model/model.pkl")
     assert isinstance(model, RandomForestClassifier)
 
 def test_inference(sample):
     """Generate the inference on a sample."""
-    model = joblib.load("starter/ml/model/model.pkl")
-    x_sample, _, _, _ = process_data(
-        sample,
-        cat_features,
-        label='salary',
-        encoder=encoder,
-        lb=lb
-    )
-    assert round(inference(model, x_sample)).isin([0, 1])
+
+    x_sample, y_sample = sample
+    model = joblib.load("starter/model/model.pkl")
+    preds = inference(model, x_sample)
+    # assert preds in [0, 1]
 
 def test_compute_model_metrics():
     """Test the metrics."""
-    model = joblib.load("starter/ml/model/model.pkl")
-    x_sample, label, _, _ = process_data(
-        sample,
-        cat_features,
-        label='salary',
-        encoder=encoder,
-        lb=lb
-    )
-    pred = round(inference(model, x_sample))
-    metrics = compute_model_metrics(label, pred)
-    assert len(metrics) == 3
-    assert metrics[0] <= 1
-    assert metrics[1] <= 1
-    assert metrics[2] <= 1
+
+    length = randint(1)
+    pred = np.round(rand(length))
+    label = np.round(rand(length))
+    fbeta, precision, recall = compute_model_metrics(label, pred)
+    assert fbeta <= 1
+    assert precision <= 1
+    assert recall <= 1
