@@ -7,8 +7,8 @@ import pandas as pd
 from pydantic import BaseModel
 import os
 import pickle
-from starter.ml.data import process_data
-from starter.ml.model import inference
+from ml.data import process_data
+from ml.model import inference
 import joblib
 import uvicorn
 
@@ -85,7 +85,7 @@ def infer(profile: Profile):
         "fnlgt": profile.fnlgt,
         "education": profile.education,
         "education_num": profile.education_num,
-        "marital_status": profile.marital_status,
+        "marital-status": profile.marital_status,
         "occupation": profile.occupation,
         "relationship": profile.relationship,
         "race": profile.race,
@@ -93,25 +93,25 @@ def infer(profile: Profile):
         "capital_gain": profile.capital_gain,
         "capital_loss": profile.capital_loss,
         "hours_per_week": profile.hours_per_week,
-        "native_country": profile.native_country
+        "native-country": profile.native_country,
     }
-    data_df = pd.DataFrame(data)
+    data_df = pd.DataFrame(data, index=[0])
 
-    model = joblib.load("model/model.pkl")
-    encoder = joblib.load("model/encoder.pkl")
-    lb = joblib.load("model/lb.pkl")
+    model = joblib.load("starter/model/model.pkl")
+    encoder = joblib.load("starter/model/encoder.pkl")
+    lb = joblib.load("starter/model/lb.pkl")
 
     processed_data, _, _, _ = process_data(
         data_df,
         categorical_features=cat_features,
-        label="salary",
+        label=None,
         training=False,
         encoder=encoder,
         lb=lb
     )
     label = inference(model, processed_data)
 
-    return {"salary": lb.inverse_transform(label)}
+    return {"salary": lb.inverse_transform(label)[0]}
 
 
 if __name__ == "__main__":
