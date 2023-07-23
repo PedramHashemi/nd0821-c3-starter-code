@@ -36,7 +36,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Train the model
       run:
-        python starter/ml/model.py
+        python starter/ml/train_model.py
     - name: Test with pytest
       run: |
         pytest
