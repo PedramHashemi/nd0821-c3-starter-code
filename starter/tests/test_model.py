@@ -48,6 +48,7 @@ def sample(encoder, lb):
         "sex",
         "native-country",
     ]
+
     census = pd.read_csv("./starter/data/census.csv")
     samp = census.iloc[0:2]
     x_sample, y_sample, _, _ = proc.process_data(
