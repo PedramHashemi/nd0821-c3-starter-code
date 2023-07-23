@@ -2,17 +2,17 @@
 
 from sklearn.model_selection import train_test_split
 from model import inference, train_model, compute_model_metrics
-# import dvc.api
+import dvc.api
 import pandas as pd
 from data import process_data
 import joblib
 
 
 # Add code to load in the data.
-# with dvc.api.open(
-#     "data/census.csv"
-# ) as d:
-#     data = pd.read_csv(d)
+with dvc.api.open(
+    "data/census.csv"
+) as d:
+    data = pd.read_csv(d)
 data = pd.read_csv("starter/data/census.csv")
 
 # Optional enhancement, use K-fold cross validation
