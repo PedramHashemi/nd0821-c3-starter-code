@@ -56,7 +56,7 @@ if __name__ == "__main__":
     metrics = performance(slice_size=.2)
     pprint.pprint(metrics)
     json_object = json.dumps(metrics, indent=3)
-    with open('starter/data/performance.json',
+    with open('starter/data/slice_output.txt',
               'w',
               encoding='utf8') as outfile:
         outfile.write(json_object)
