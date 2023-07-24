@@ -58,15 +58,4 @@ print(test.iloc[-3])
 # Performance
 
 metrics = compute_model_metrics(y_test, y_pred)
-
-# for i, row in test.iterrows():
-#     print(row)
-#     X_test, y_test, encoder, lb = process_data(
-#         pd.DataFrame(row, index=[0]),
-#         categorical_features=cat_features,
-#         label="salary",
-#         training=False,
-#         encoder=encoder,
-#         lb=lb
-#     )
-#     print(f"{i}, {inference(model, X_test)}")
+print(metrics)
