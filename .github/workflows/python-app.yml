@@ -40,3 +40,15 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+
+  deploy:
+    name: Deploy to Render
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: Bounceapp/render-action@0.7.0
+        with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-ciul1btgkuvoig8picsg
