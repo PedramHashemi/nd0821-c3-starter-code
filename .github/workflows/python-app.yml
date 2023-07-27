@@ -50,8 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
-        uses: bounceapp/render-action@0.6.0
+        uses: johnbeynon/render-deploy-action@0.0.8
         with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          api-key: ${{ secrets.RENDER_TOKEN }}
           service-id: srv-ciul1btgkuvoig8picsg
