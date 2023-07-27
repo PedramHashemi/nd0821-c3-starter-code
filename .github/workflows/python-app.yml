@@ -46,11 +46,11 @@ jobs:
 
   deploy:
     name: Deploy to Render
-    needs: [build]
+    # needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
-        uses: Bounceapp/render-action@0.7.0
+        uses: bounceapp/render-action@0.6.0
         with:
           render-token: ${{ secrets.RENDER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
